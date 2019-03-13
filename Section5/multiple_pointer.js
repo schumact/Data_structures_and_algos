@@ -16,4 +16,5 @@ const countUniqueValues = (sortedArr) => {
         pointer2++;
     }
     console.log('count: ', count);
+    return count;
 }
