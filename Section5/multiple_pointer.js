@@ -7,9 +7,7 @@ const countUniqueValues = (sortedArr) => {
     let pointer2 = 1;
     let count = 1;
     for (pointer2; pointer2 <= arr.length - 1;){
-        if (arr[pointer2] === arr[pointer1]) {
-            
-        } else {
+        if (arr[pointer2] !== arr[pointer1]) {
             pointer1 = pointer2;
             count++;
         }
