@@ -45,3 +45,51 @@ function flatten(arr){
 // 	if(str.length <= 1) return str;
 // 	return reverse(str.slice(1)) + str[0];
 // }
+
+// given an array of strings, capitalize the first letter
+// of each string in the array
+function capitalizeFirst(arr, new_arr) {
+    if (arr.length === 0) return new_arr;
+   	let str = arr.pop();
+   	new_arr.push(str.replace(str[0], str[0].toUpperCase()));
+   	return capitalizeFirst(arr, new_arr);
+}
+
+// return the sum of all even numbers in an object which
+// may contain nested objects
+function nestedEvenSum(obj) {
+    let sum = 0;
+    for (let i in obj) {
+        if (typeof obj[i] === "number" && obj[i] % 2 === 0) sum += obj[i];
+        if (typeof obj[i] === 'object') sum += nestedEvenSum(obj[i]);
+    }
+    return sum;
+}
+
+// given an array of words, return a new array
+// containing each word capitalized
+function capitalizeWords(arr, new_arr) {
+    if (arr.length === 0) return new_arr;
+    let str = arr.pop();
+    new_arr.push(str.toUpperCase());
+    return capitalizeWords(arr, new_arr);
+}
+
+// takes an obj and finds all the values which are numbers
+// and converts them to strings
+function stringifyNumbers(obj) {
+    for (let i in obj) {
+        if (typeof obj[i] === "number") obj[i] = obj[i].toString();
+        if (typeof obj[i] === "object") stringifyNumbers(obj[i]);
+    }
+    return obj;
+}
+
+function collectStrings(obj) {
+    let arr = [];
+    for (let i in obj) {
+        if (typeof obj[i] === 'string') arr.push(obj[i]);
+        if (typeof obj[i] === 'object') arr.concat(collectStrings(obj[i]));
+    }
+    return arr;
+}
