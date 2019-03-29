@@ -85,6 +85,7 @@ function stringifyNumbers(obj) {
     return obj;
 }
 
+// return an array of string gather from nested object
 function collectStrings(obj) {
     let arr = [];
     for (let i in obj) {
