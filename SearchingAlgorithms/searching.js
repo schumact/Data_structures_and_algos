@@ -26,3 +26,20 @@ function binarySearch(arr, val) {
     }
     return -1;
 }
+
+// naive string search
+function stringSearch(str, subString) {
+    let count = 0;
+    for (let char = 0; char <= str.length -1; char++) {
+        let temp_char = char;
+        for (let letter = 0; letter <= subString.length - 1; letter++) {
+            if (subString[letter] === str[temp_char]){ // cleaner to write, if (str[char] !== subString[char + letter]) break;
+                temp_char++;
+            } else break;
+            if (letter === subString.length -1) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
