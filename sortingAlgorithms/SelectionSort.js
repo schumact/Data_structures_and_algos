@@ -7,7 +7,7 @@ function selectionSort(arr) {
                 new_min_index = j + 1;
             }
         }
-        if (new_min_index != i) {
+        if (new_min_index !== i) {
             swap(arr, i, new_min_index);
         }
     }
