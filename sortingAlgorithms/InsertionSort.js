@@ -2,6 +2,7 @@ function insertionSort(arr) {
     for (let i = 1; i <= arr.length - 1; i++) {
         for (let j = i; j > 0; j--) {
             if (arr[j] < arr[j - 1]) swap(arr, j, (j -1));
+            else break;
         }
     }
     return arr;
