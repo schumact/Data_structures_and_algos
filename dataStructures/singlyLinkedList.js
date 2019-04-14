@@ -53,6 +53,7 @@ class SinglyLinkedList {
     }
 
     shift() {
+        // remove val from beginning of list
         if (!this.head) return undefined;
         let currentHead = this.head;
         this.head = currentHead.next;
@@ -77,16 +78,77 @@ class SinglyLinkedList {
         return this;
     }
 
+    // retrieve a node by it's position in the list
+    get(index) {
+        if (index < 0 || index >= this.length) return null;
+        let tempIndex = 0;
+        let current = this.head;
+        while (tempIndex !== index) {
+            current = current.next;
+            tempIndex++;
+        }
+        // console.log(current);
+        return current;
+    }
+
+    set(index, val) {
+        let getIndex = this.get(index);
+        if (!getIndex) return false;
+        getIndex.val = val;
+        return true;
+    }
+
+    insert(index, val) {
+        if (index < 0 || index > this.length) return false;
+        let newNode = new Node(val);
+        if (index === 0) return !!this.unshift(val);
+        if (index === this.length) return !!this.push(val);
+        let previous = this.get(index - 1);
+        let current = previous.next;
+        previous.next = newNode;
+        newNode.next = current;
+        this.length++;
+        return true; 
+    }
+
+    remove(index) {
+        if (index < 0 || index >= this.length) return null;
+        if (index === this.length -1) return this.pop();
+        if (index === 0) return this.shift();
+        let previous = this.get(index - 1);
+        let toBeRemoved = previous.next;
+        previous.next = toBeRemoved.next;
+        this.length--;
+        return toBeRemoved;
+    }
+    
+    reverse() {
+        // was a bit confusing at first
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        var prev = null;
+        var next;
+        for (var i=0; i < this.length; i++) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return this;
+    }
+
 }
 
 var list = new SinglyLinkedList();
-console.log(list);
-// list.push('HI');
-// list.push("there");
-// list.push("!");
+list.push('HI');
+list.push("there");
+list.push("!");
 // list.pop();
-list.unshift("First");
-console.log(list);
+// list.unshift("First");
+list.insert(2, "Billy");
+list.insert(0, 'WOAHHHH');
+console.log(list.remove(2));
 
     // var first = new Node("Hi");
     // first.next = new Node("there");
