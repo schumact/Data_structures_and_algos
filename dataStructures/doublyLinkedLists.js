@@ -40,6 +40,7 @@ class doublyLinkedList {
         }
         this.length--;
         return currentTail; // return popped value
+    }
 }
 
 // let list = new doublyLinkedList();
