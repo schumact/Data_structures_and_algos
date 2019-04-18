@@ -39,14 +39,103 @@ class doublyLinkedList {
             currentTail.prev = null;
         }
         this.length--;
+        // console.log(this);
+        // console.log(currentTail);
         return currentTail; // return popped value
     }
+
+    shift() {
+        if (!this.head) return undefined;
+        let currentHead = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+            this.length--;
+            return currentHead;
+        }
+        this.head = currentHead.next;
+        this.head.prev = null;
+        currentHead.next = null;
+        this.length--;
+        return currentHead;
+    }
+
+    unshift(val) {
+        var newNode = new Node(val);
+        if (this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+            return ;
+        }
+        let currentHead = this.head;
+        currentHead.prev = newNode;
+        newNode.next = currentHead;
+        this.head = newNode;
+        this.length++;
+        return this;
+    }
+
+    get(indx) {
+        if (indx < 0 || indx >= this.length) return null;
+        let middle = Math.floor(this.length / 2);
+        var count, current;
+        if (indx < middle) {
+            count = 0;
+            current = this.head;
+            while (count !== indx) {
+                current = current.next;
+                count++;
+            }
+            return current;   
+        } else {
+            count = this.length - 1;
+            current = this.tail;
+            while (count !== indx) {
+                current = current.prev;
+                count--;
+            }
+            return current;   
+        }
+    }
+
+    set(index, val) {
+        let currentNode = this.get(index);
+        if (!currentNode) return false;
+        currentNode.val = val;
+        return true
+    }
+
+    insert(index, val) {
+        let CurrentIndexNode = this.get(index);
+        if (!CurrentIndexNode) return false;
+        if (index === 0) return this.unshift();
+        if (index === this.length) return this.push();
+        let newNode = new Node(val);
+        let oldPrev = CurrentIndexNode.prev;
+        oldPrev.next = newNode, CurrentIndexNode.prev = newNode;
+        newNode.next = CurrentIndexNode, newNode.prev = oldPrev;
+        this.length++;
+        console.log(this);
+        return true;
+    }
+
+    remove(index) {
+        let CurrentIndexNode = this.get(index);
+        if (!CurrentIndexNode) return false;
+        if (index === 0) return this.shift();
+        if (index === (this.length - 1)) return this.pop();
+        let prevNode = CurrentIndexNode.prev;
+        let nextNode = CurrentIndexNode.next;
+        prevNode.next = next, nextNode.prev = prevNode;
+        CurrentIndexNode.next = null, CurrentIndexNode.prev = null;
+        this.length--;
+        return CurrentIndexNode;
+    }
+
 }
 
-// let list = new doublyLinkedList();
-// let first = new Node(11);
-// list.head = first;
-// let second = new Node(12);
-// first.next = second;
-// first.next.prev = first;
-// console.log(list);
+let list = new doublyLinkedList();
+// list.push(11);
+// list.push(12);
+// list.push(13);
+// list.push(14);
